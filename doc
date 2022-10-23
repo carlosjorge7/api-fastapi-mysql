@@ -1,0 +1,6 @@
+# Creamos un etorno virtual y lo activamos
+virtualenv env
+source ./env/Scripts/activate
+
+# Instalamos las dependencias
+pip install fastapi uvicorn sqlalchemy pymysql
