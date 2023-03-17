@@ -3,7 +3,7 @@ from config.db import conn
 from models.products import products
 from schemas.product import Product
 
-routerProducts = APIRouter()
+routerProducts = APIRouter(prefix='/products')
 
 @routerProducts.get('/', response_model = list[Product])
 def get_products():
