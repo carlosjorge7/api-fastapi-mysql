@@ -11,3 +11,4 @@ class User(BaseModel):
     username: str
     email: Optional[str]
     password: str
+    
