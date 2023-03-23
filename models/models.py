@@ -8,4 +8,11 @@ products = Table('products', meta,
                 Column('description', String(50))
                 )
 
+users = Table('users', meta, 
+                Column('id', Integer, primary_key=True), 
+                Column('username', String(50)),
+                Column('email', String(50)),
+                Column('password', String(100))
+                )
+
 meta.create_all(engine)
