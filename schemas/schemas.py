@@ -9,5 +9,5 @@ class Product(BaseModel):
 class User(BaseModel):
     id: Optional[str]
     username: str
-    email: str
+    email: Optional[str]
     password: str
