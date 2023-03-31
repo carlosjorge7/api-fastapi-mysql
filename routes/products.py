@@ -1,12 +1,18 @@
-from fastapi import APIRouter, Response
+from fastapi import APIRouter, Response, Depends
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from config.db import conn
 from models.models import products
+from routes.users import authenticate_token
 from schemas.schemas import Product
 
 routerProducts = APIRouter(prefix='/products')
 
+bearer = HTTPBearer()
+
 @routerProducts.get('/', response_model = list[Product])
-def get_products():
+async def get_products(token: HTTPAuthorizationCredentials = Depends(bearer)):
+    userId = authenticate_token(token.credentials)
+    print(userId)
     return conn.execute(products.select()).fetchall()
 
 @routerProducts.post('/', response_model = Product)
