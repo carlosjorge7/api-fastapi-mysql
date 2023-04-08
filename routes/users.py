@@ -20,7 +20,7 @@ async def login(user: User):
     user = authenticate_user(user.username, user.password)
     if not user:
         raise HTTPException(status_code=401, detail="Invalid username or password")
-    token = jwt.encode({'userId': user.id, 'exp': datetime.utcnow() + timedelta(minutes=2)}, 'secret', algorithm="HS256")
+    token = jwt.encode({'user_id': user.id, 'exp': datetime.utcnow() + timedelta(minutes=30)}, 'secret', algorithm="HS256")
     return {"access_token": user.username, "token": token}
 
 #Fuctions
@@ -48,7 +48,7 @@ def authenticate_token(token: str):
         exp_date = datetime.utcfromtimestamp(payload.get('exp'))
         if datetime.utcnow() > exp_date:
           raise HTTPException(status_code=401, detail="Invalid credential")  
-        userId = payload.get('userId')
+        userId = payload.get('user_id')
         if userId is None:
             raise HTTPException(status_code=401, detail="Invalid credential")
     except JWTError:

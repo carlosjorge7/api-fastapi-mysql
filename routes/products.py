@@ -9,6 +9,9 @@ routerProducts = APIRouter(prefix='/products')
 
 bearer = HTTPBearer()
 
+# def validateToken(token: HTTPAuthorizationCredentials = Depends(bearer)):
+#     return authenticate_token(token.credentials)
+
 @routerProducts.get('/', response_model = list[Product])
 async def get_products(token: HTTPAuthorizationCredentials = Depends(bearer)):
     userId = authenticate_token(token.credentials)
@@ -16,8 +19,9 @@ async def get_products(token: HTTPAuthorizationCredentials = Depends(bearer)):
     return conn.execute(products.select()).fetchall()
 
 @routerProducts.post('/', response_model = Product)
-def create_product(product: Product):
-    new_product = {'name': product.name, 'description': product.description}
+async def create_product(product: Product, token: HTTPAuthorizationCredentials = Depends(bearer)):
+    user_id = authenticate_token(token.credentials)
+    new_product = {'name': product.name, 'description': product.description, 'user_id': user_id}
     res = conn.execute(products.insert().values(new_product))
     return conn.execute(products.select().where(products.c.id == res.lastrowid)).first()
 
@@ -37,6 +41,7 @@ def update_product(id: str, product: Product):
                         .values(name = product.name, description = product.description)
                         .where(products.c.id == id))
     return conn.execute(products.select().where(products.c.id == id)).first()
+
 
 
 
