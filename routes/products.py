@@ -9,14 +9,10 @@ routerProducts = APIRouter(prefix='/products')
 
 bearer = HTTPBearer()
 
-# def validateToken(token: HTTPAuthorizationCredentials = Depends(bearer)):
-#     return authenticate_token(token.credentials)
-
 @routerProducts.get('/', response_model = list[Product])
 async def get_products(token: HTTPAuthorizationCredentials = Depends(bearer)):
-    userId = authenticate_token(token.credentials)
-    print(userId)
-    return conn.execute(products.select()).fetchall()
+    user_id = authenticate_token(token.credentials)
+    return conn.execute(products.select().where(products.c.user_id == user_id)).fetchall()
 
 @routerProducts.post('/', response_model = Product)
 async def create_product(product: Product, token: HTTPAuthorizationCredentials = Depends(bearer)):
@@ -26,7 +22,7 @@ async def create_product(product: Product, token: HTTPAuthorizationCredentials =
     return conn.execute(products.select().where(products.c.id == res.lastrowid)).first()
 
 @routerProducts.get('/{id}', response_model = Product)
-def get_product(id: str):
+async def get_product(id: str):
     res = conn.execute(products.select().where(products.c.id == id)).first()
     return res
 
