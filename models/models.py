@@ -13,7 +13,7 @@ products = Table('products', meta,
                 Column('id', Integer, primary_key=True), 
                 Column('name', String(50)),
                 Column('description', String(50)),
-                Column('user_id', Integer, ForeignKey('users.id'))
+                Column('user_id', Integer)
                 )
 
 meta.create_all(engine)
