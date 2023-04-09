@@ -15,4 +15,4 @@ uvicorn main:app --host="127.0.0.1" --port="3000" --reload
 
 # next step
 
-relacionar usuarios y productos, token expires, y mejorar la proteccion de ruitas
+Variables de entorno, conectar con algun servicio de mysql gratis, desplegar la api

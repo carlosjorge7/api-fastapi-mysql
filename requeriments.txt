@@ -1,2 +1,2 @@
 # Instalamos las dependencias
-pip install fastapi uvicorn sqlalchemy pymysql passlib bcrypt jwt
+pip install fastapi uvicorn sqlalchemy pymysql passlib bcrypt jwt python-dotenv
