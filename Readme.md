@@ -3,7 +3,8 @@
 # create enviroment and activate
 
 virtualenv env
-source ./env/Scripts/activate
+source ./env/Scripts/activate (Windows)
+source ./env/bin/activate (Linux)
 
 # download dependencies
 
