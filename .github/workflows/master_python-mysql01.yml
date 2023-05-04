@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'python-mysql01'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_047214D3AC8342E3A1A5001DBBBEF72E }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_7D695FAEAF814CA18F46E26CC0DCCA64 }}
