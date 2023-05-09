@@ -30,8 +30,8 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Run app
-        run: uvicorn main:app
+      - name: Start application
+        run: uvicorn main:app --host 0.0.0.0 --port 8000
 
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
