@@ -30,11 +30,6 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Start application
-        run: uvicorn main:app --host 0.0.0.0 --port 8000
-
-      # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
-
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v2
         with:
@@ -42,6 +37,9 @@ jobs:
           path: |
             . 
             !venv/
+
+      - name: Start application
+        run: uvicorn main:app
 
   deploy:
     runs-on: ubuntu-latest
